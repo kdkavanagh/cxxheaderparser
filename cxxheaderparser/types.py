@@ -664,6 +664,8 @@ class Parameter:
     name: typing.Optional[str] = None
     default: typing.Optional[Value] = None
     param_pack: bool = False
+    deduces_this: bool = False
+    """Indicates that this parameter is the parameter used for cxx23 deducing-this"""
 
     def format(self) -> str:
         default = f" = {self.default.format()}" if self.default else ""
