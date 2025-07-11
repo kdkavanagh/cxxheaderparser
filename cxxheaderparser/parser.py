@@ -1786,7 +1786,7 @@ class CxxParser:
         at_type: typing.Optional[Type] = None
         extras: typing.Dict[str, typing.Any] = {}
 
-        if self.lex.token_if("this") and deduce_this_ok:
+        if deduce_this_ok and self.lex.token_if("this"):
             extras["deduces_this"] = True
 
         if not tok:
