@@ -13,7 +13,7 @@ git_dir = join(setup_dir, ".git")
 version_file = join(setup_dir, "cxxheaderparser", "version.py")
 
 # Automatically generate a version.py based on the git version
-if exists(git_dir):
+if False and exists(git_dir):
     p = subprocess.Popen(
         ["git", "describe", "--tags", "--long", "--dirty=-dirty"],
         stdout=subprocess.PIPE,
