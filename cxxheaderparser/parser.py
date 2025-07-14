@@ -607,13 +607,13 @@ class CxxParser:
                         lex.return_token(ptok)
                         param = self._parse_template_type_parameter(tok, None)
                     else:
+                        lex.return_token(ptok)
                         param, _ = self._parse_parameter(
-                            ptok,
+                            tok,
                             TemplateNonTypeParam,
                             concept_ok=False,
                             deduce_this_ok=False,
                             end=">",
-                            has_typename=True,
                         )
                 else:
                     param, _ = self._parse_parameter(
@@ -1772,7 +1772,6 @@ class CxxParser:
         concept_ok: bool,
         deduce_this_ok: bool,
         end: str = ")",
-        has_typename: bool = False,
     ) -> typing.Tuple[PT, typing.Optional[Type]]:
         """
         Parses a single parameter (excluding vararg parameters). Also used
@@ -1787,9 +1786,6 @@ class CxxParser:
         parsed_type: typing.Optional[Type]
         at_type: typing.Optional[Type] = None
         extras: typing.Dict[str, typing.Any] = {}
-
-        if has_typename:
-            extras["has_typename"] = True
 
         if deduce_this_ok and self.lex.token_if("this"):
             extras["deduces_this"] = True
